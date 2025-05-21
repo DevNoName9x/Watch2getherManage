@@ -1,0 +1,9 @@
+﻿@page "{id}"
+@model Watch2getherManage.Pages.w2g.DetailsModel
+@{
+}
+<h2>Chi tiết ID: @Model.StreamKey</h2>
+<a href="https://w2g.tv/?r=@Model.StreamKey">Mở trên trang chủ</a>
+<div>
+    <iframe frameborder='0' width='1080' height='720' src='https://w2g.tv/embed?room_id=@Model.StreamKey' allowfullscreen allow='autoplay; fullscreen; camera; microphone;'></iframe>
+</div>

@@ -1,0 +1,111 @@
+﻿@page
+@model Watch2getherManage.Pages.w2g.IndexModel
+@{
+    ViewData["Title"] = "Watch Together List";
+}
+
+<div class="container mt-5">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2>Danh sách StreamKey</h2>
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createStreamKeyModal">
+            Create
+        </button>
+        <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addExistingRoomModal">
+            Thêm 1 phòng có sẵn
+        </button>
+    </div>
+
+    <table class="table table-bordered table-hover">
+        <thead class="table-light">
+            <tr>
+                <th>StreamKey</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model.ListStreamKeys != null && Model.ListStreamKeys.Any())
+            {
+                foreach (var key in Model.ListStreamKeys)
+                {
+                    <tr>
+                        <td>
+                            <a asp-page="Details" asp-route-id="@key">@key</a>
+                        </td>
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr>
+                    <td colspan="1" class="text-center">Không có StreamKey nào.</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+<!-- Toast Notification -->
+<div aria-live="polite" aria-atomic="true" class="position-fixed top-0 end-0 p-3" style="z-index: 1080;">
+    <div id="responseToast" class="toast align-items-center text-bg-primary border-0" role="alert" aria-live="assertive" aria-atomic="true"
+         @(string.IsNullOrEmpty(Model.ResponseMessage) ? "" : "data-bs-autohide='false'")>
+        <div class="d-flex">
+            <div class="toast-body">
+                @Model.ResponseMessage
+            </div>
+            <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+    </div>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="createStreamKeyModal" tabindex="-1" aria-labelledby="createStreamKeyModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form method="post" asp-page-handler="Create">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="createStreamKeyModalLabel">Tạo mới Stream Key</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <!-- Thêm các trường cần thiết cho việc tạo mới StreamKey tại đây -->
+                    <div class="mb-3">
+                        <label for="videoUrl" class="form-label">URL Video (YouTube, Vimeo, v.v.):</label>
+                        <input type="text" id="videoUrl" name="VideoUrl" class="form-control" placeholder="Ví dụ: https://www.youtube.com/watch?v=example">
+                    </div>
+                    <div class="mb-3">
+                        <label for="bgColor" class="form-label">Màu nền (Hex):</label>
+                        <input type="text" id="bgColor" name="BgColor" class="form-control" placeholder="Ví dụ: #FF0000">
+                    </div>
+                    <div class="mb-3">
+                        <label for="bgOpacity" class="form-label">Độ trong suốt (0-100):</label>
+                        <input type="number" id="bgOpacity" name="BgOpacity" class="form-control" min="0" max="100" placeholder="Ví dụ: 50">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                    <button type="submit" class="btn btn-primary">Tạo mới</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- Modal: Add Existing Room -->
+<div class="modal fade" id="addExistingRoomModal" tabindex="-1" aria-labelledby="addExistingRoomModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form method="post" asp-page-handler="AddExistingRoom">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addExistingRoomModalLabel">Thêm 1 phòng có sẵn</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="existingStreamKey" class="form-label">StreamKey</label>
+                        <input type="text" id="existingStreamKey" name="StreamKey" class="form-control" placeholder="Nhập StreamKey phòng có sẵn" required>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                    <button type="submit" class="btn btn-success">Thêm phòng</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
