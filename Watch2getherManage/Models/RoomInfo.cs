@@ -8,7 +8,7 @@
         public long Id { get; set; }
 
         [JsonProperty("streamkey")]
-        public string Streamkey { get; set; }
+        public string? Streamkey { get; set; }
 
         [JsonProperty("created_at")]
         public DateTime? CreatedAt { get; set; }
@@ -17,7 +17,7 @@
         public bool Persistent { get; set; }
 
         [JsonProperty("persistent_name")]
-        public string PersistentName { get; set; }
+        public string? PersistentName { get; set; }
 
         [JsonProperty("deleted")]
         public bool Deleted { get; set; }
@@ -26,13 +26,13 @@
         public bool Moderated { get; set; }
 
         [JsonProperty("location")]
-        public string Location { get; set; }
+        public string? Location { get; set; }
 
         [JsonProperty("stream_created")]
         public bool StreamCreated { get; set; }
 
         [JsonProperty("background")]
-        public string Background { get; set; }
+        public string? Background { get; set; }
 
         [JsonProperty("moderated_background")]
         public bool ModeratedBackground { get; set; }
@@ -41,7 +41,7 @@
         public bool ModeratedPlaylist { get; set; }
 
         [JsonProperty("bg_color")]
-        public string BgColor { get; set; }
+        public string? BgColor { get; set; }
 
         [JsonProperty("bg_opacity")]
         public double BgOpacity { get; set; }
@@ -50,7 +50,7 @@
         public bool ModeratedItem { get; set; }
 
         [JsonProperty("theme_bg")]
-        public string ThemeBg { get; set; }
+        public string? ThemeBg { get; set; }
 
         [JsonProperty("playlist_id")]
         public long PlaylistId { get; set; }

@@ -55,7 +55,9 @@ namespace Watch2getherManage.Pages.w2g
                     ResponseMessage = "Lỗi: Không thể tạo phòng.";
                     return Page();
                 }
-                service.Insert(roomInfo.Streamkey);
+
+                
+                service.Insert(roomInfo.Streamkey?? "");
                 IsError = false;
                 ResponseMessage = $@"Phòng đã được tạo!";
             }

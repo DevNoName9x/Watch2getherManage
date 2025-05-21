@@ -6,7 +6,7 @@ namespace Watch2getherManage.Pages.w2g
     public class DetailsModel : PageModel
     {
         [BindProperty]
-        public string StreamKey { get; set; } 
+        public required string StreamKey { get; set; } 
         public void OnGet(string id)
         {
             StreamKey = id;
