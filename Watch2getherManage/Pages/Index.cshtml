@@ -5,17 +5,13 @@
 }
 
 <div class="container mt-5">
-    <!-- Hiển thị phản hồi -->
-    <div id="response" class="alert alert-info">
-        @if (!string.IsNullOrEmpty(Model.ResponseMessage))
-        {
-          <div>
-                @Html.Raw(Model.ResponseMessage)
-          </div>
-        }
-        else
-        {
-            <p>Phản hồi từ server sẽ hiển thị ở đây...</p>
-        }
-    </div>
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/BfvYwELUnRw?si=X9a8Z06TM1lefS4o"
+        title="YouTube video player" frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
+    </iframe>
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/FV3JeR3fJmw?si=F1_ECsM9KEs8qjwg"
+        title="YouTube video player" frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 </div>
