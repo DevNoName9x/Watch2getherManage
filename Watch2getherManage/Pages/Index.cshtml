@@ -5,59 +5,6 @@
 }
 
 <div class="container mt-5">
-    <h2 class="mb-4">Watch2Gether API Demo</h2>
-    <iframe frameborder='0' src='https://w2g.tv/embed?room_id=8vf1ifbqpznvxbaa6j' allowfullscreen allow='autoplay; fullscreen; camera; microphone;'></iframe>
-
-    <!-- Form tạo phòng -->
-    <h3 class="mb-3">Tạo phòng mới</h3>
-    <form method="post" asp-page-handler="CreateRoom" class="mb-5">
-        <div class="mb-3">
-            <label for="videoUrl" class="form-label">URL Video (YouTube, Vimeo, v.v.):</label>
-            <input type="text" id="videoUrl" name="VideoUrl" class="form-control" placeholder="Ví dụ: https://www.youtube.com/watch?v=example">
-        </div>
-        <div class="mb-3">
-            <label for="bgColor" class="form-label">Màu nền (Hex):</label>
-            <input type="text" id="bgColor" name="BgColor" class="form-control" placeholder="Ví dụ: #FF0000">
-        </div>
-        <div class="mb-3">
-            <label for="bgOpacity" class="form-label">Độ trong suốt (0-100):</label>
-            <input type="number" id="bgOpacity" name="BgOpacity" class="form-control" min="0" max="100" placeholder="Ví dụ: 50">
-        </div>
-        <button type="submit" class="btn btn-primary">Tạo phòng</button>
-    </form>
-
-    <!-- Form cập nhật phòng -->
-    <h3 class="mb-3">Cập nhật video trong phòng</h3>
-    <form method="post" asp-page-handler="UpdateRoom" class="mb-5">
-        <div class="mb-3">
-            <label for="streamKey" class="form-label">Stream Key của phòng:</label>
-            <input type="text" id="streamKey" name="StreamKey" class="form-control" placeholder="Nhập Stream Key" required>
-        </div>
-        <div class="mb-3">
-            <label for="updateVideoUrl" class="form-label">URL Video mới:</label>
-            <input type="text" id="updateVideoUrl" name="UpdateVideoUrl" class="form-control" placeholder="Ví dụ: https://www.youtube.com/watch?v=new_video" required>
-        </div>
-        <button type="submit" class="btn btn-success">Cập nhật video</button>
-    </form>
-
-    <!-- Form thêm video vào playlist -->
-    <h3 class="mb-3">Thêm video vào danh sách phát</h3>
-    <form method="post" asp-page-handler="AddToPlaylist" class="mb-5">
-        <div class="mb-3">
-            <label for="streamKeyPlaylist" class="form-label">Stream Key của phòng:</label>
-            <input type="text" id="streamKeyPlaylist" name="StreamKey" class="form-control" placeholder="Nhập Stream Key" required>
-        </div>
-        <div class="mb-3">
-            <label for="playlistVideoUrl" class="form-label">URL Video:</label>
-            <input type="text" id="playlistVideoUrl" name="PlaylistVideoUrl" class="form-control" placeholder="Ví dụ: https://www.youtube.com/watch?v=dMH0bHeiRNg" required>
-        </div>
-        <div class="mb-3">
-            <label for="videoTitle" class="form-label">Tiêu đề video:</label>
-            <input type="text" id="videoTitle" name="VideoTitle" class="form-control" placeholder="Ví dụ: Hello World">
-        </div>
-        <button type="submit" class="btn btn-warning">Thêm video vào playlist</button>
-    </form>
-
     <!-- Hiển thị phản hồi -->
     <div id="response" class="alert alert-info">
         @if (!string.IsNullOrEmpty(Model.ResponseMessage))
@@ -70,9 +17,5 @@
         {
             <p>Phản hồi từ server sẽ hiển thị ở đây...</p>
         }
-    </div>
-    <div>
-        <pre>
-        </pre>
     </div>
 </div>

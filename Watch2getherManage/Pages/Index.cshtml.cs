@@ -12,13 +12,13 @@ namespace Watch2getherManage.Pages
 
         [BindProperty]
         public string? ResponseMessage { get; set; }
-        
+
         public void OnGet()
         {
             // Không cần xử lý gì khi tải trang
         }
 
-        public async Task<IActionResult> OnPostCreateRoomAsync(string videoUrl, string bgColor, int bgOpacity =0)
+        public async Task<IActionResult> OnPostCreateRoomAsync(string videoUrl, string bgColor, int bgOpacity = 0)
         {
             string apiKey = config["ApiKey"] ?? "";
             if (string.IsNullOrEmpty(apiKey))
@@ -89,7 +89,6 @@ namespace Watch2getherManage.Pages
             {
                 ResponseMessage = $"Lỗi: {ex.Message}. Vui lòng kiểm tra API Key hoặc kết nối mạng.";
             }
-
             return Page();
         }
 
@@ -101,34 +100,6 @@ namespace Watch2getherManage.Pages
                 ResponseMessage = "Vui lòng nhập API Key, Stream Key và URL video!";
                 return Page();
             }
-
-            var payload = new
-            {
-                w2g_api_key = apiKey,
-                item_url = updateVideoUrl
-            };
-
-            try
-            {
-                var client = _httpClientFactory.CreateClient();
-                var content = new StringContent(JsonSerializer.Serialize(payload), Encoding.UTF8, "application/json");
-                var response = await client.PostAsync($"https://api.w2g.tv/rooms/{streamKey}/sync_update", content);
-
-                // Kiểm tra tiêu đề CORS
-                //var corsHeader = response.Headers.GetValues("Access-Control-Allow-Origin")?.FirstOrDefault() ?? "Không có";
-
-                if (!response.IsSuccessStatusCode)
-                {
-                    ResponseMessage = $"Lỗi: {(int)response.StatusCode} - {response.ReasonPhrase}";
-                    return Page();
-                }
-                ResponseMessage = $"Video đã được cập nhật thành công cho phòng {streamKey}! <br/>";
-            }
-            catch (Exception ex)
-            {
-                ResponseMessage = $"Lỗi: {ex.Message}. Có thể do Stream Key sai hoặc URL video không hợp lệ.";
-            }
-
             return Page();
         }
         // Thêm video vào playlist
@@ -140,39 +111,6 @@ namespace Watch2getherManage.Pages
                 ResponseMessage = "Vui lòng nhập API Key, Stream Key và URL video!";
                 return Page();
             }
-
-            var payload = new
-            {
-                w2g_api_key = apiKey,
-                add_items = new[]
-                {
-                    new
-                    {
-                        url = playlistVideoUrl,
-                        title = string.IsNullOrEmpty(videoTitle) ? null : videoTitle
-                    }
-                }
-            };
-
-            try
-            {
-                var client = _httpClientFactory.CreateClient();
-                var content = new StringContent(JsonSerializer.Serialize(payload), Encoding.UTF8, "application/json");
-                var response = await client.PostAsync($"https://api.w2g.tv/rooms/{streamKey}/playlists/current/playlist_items/sync_update", content);
-
-                if (!response.IsSuccessStatusCode)
-                {
-                    ResponseMessage = $"Lỗi: {(int)response.StatusCode} - {response.ReasonPhrase}";
-                    return Page();
-                }
-
-                ResponseMessage = $"Video '{videoTitle ?? playlistVideoUrl}' đã được thêm vào danh sách phát của phòng {streamKey}!";
-            }
-            catch (Exception ex)
-            {
-                ResponseMessage = $"Lỗi: {ex.Message}. Có thể do Stream Key sai hoặc URL video không hợp lệ.";
-            }
-
             return Page();
         }
     }

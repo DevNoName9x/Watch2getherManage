@@ -15,7 +15,7 @@ namespace Watch2getherManage.Pages.w2g
         [BindProperty]
         public bool IsError { get; set; }
         [BindProperty]
-        public List<string> ListStreamKeys { get; set; } = service.GetAllKeys().Select(x => x.StreamKey).ToList();
+        public List<string> ListStreamKeys { get; set; } = [.. service.GetAllKeys().Select(x => x.StreamKey)];
         public void OnGet()
         {
         }
